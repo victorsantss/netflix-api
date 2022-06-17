@@ -1,5 +1,6 @@
 
 import express from "express"
+import passport from "passport"
 
 import { ShowController } from "../controllers"
 import validationMiddleware from "../middlewares/validation.middleware"
@@ -7,7 +8,7 @@ import createShowSchema from "../schemas/create-show.schema"
 
 const showsRouter = express.Router()
 
-showsRouter.get("/shows", ShowController.list)
+showsRouter.get("/shows", passport.authenticate('jwt', { session: false }), ShowController.list)
 
 showsRouter.get("/shows/:id", ShowController.listOne)
 
