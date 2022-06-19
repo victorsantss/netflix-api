@@ -1,15 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import Show from "./show.entity";
 
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
 
   @Column({ length: 100, unique: true })
-  email: string;
+  email: string
 
   @Column({ length: 100 })
-  password: string;
+  password: string
+
+  @ManyToMany(() => Show, { eager: true })
+  @JoinTable()
+  list: Show[]
 }
 
 export default User
