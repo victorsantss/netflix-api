@@ -1,6 +1,6 @@
 enum ShowCategory {
   MOVIE = "MOVIE",
-  TVSHOWS = 'TVSHOWS',
+  TV_SHOWS = 'TV_SHOWS',
 }
 
 export default ShowCategory
