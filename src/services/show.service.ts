@@ -2,10 +2,7 @@ import { Repository } from "typeorm"
 import { AppDataSource } from "../infrastructure/database/data-source"
 import { Show } from "../entities"
 import NotFoundException from "../exceptions/not-found.exception";
-
-interface CreateShowDTO {
-  title: string;
-}
+import { CreateShowDTO } from "../interfaces";
 
 class ShowService {
   private showRepository: Repository<Show>;

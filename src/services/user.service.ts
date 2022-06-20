@@ -3,11 +3,7 @@ import { Repository } from 'typeorm';
 import { AppDataSource } from '../infrastructure/database/data-source';
 import User from '../entities/user.entity';
 import BadRequestException from '../exceptions/bad-request.exception';
-
-interface CreateUserDTO {
-  email: string,
-  password: string,
-}
+import { CreateUserDTO } from '../interfaces';
 
 class UserService {
   userRepository: Repository<User>;
