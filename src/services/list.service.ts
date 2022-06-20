@@ -3,6 +3,7 @@ import { AppDataSource } from "../infrastructure/database/data-source";
 import { Show } from "../entities";
 import User from "../entities/user.entity";
 import BadRequestException from "../exceptions/bad-request.exception";
+import NotFoundException from "../exceptions/not-found.exception";
 
 class ListService {
   userRepository: Repository<User>;
@@ -34,12 +35,15 @@ class ListService {
   }
 
   remove(showId: number, user: User) {
-    const newUserList = user.list.filter(show => show.id !== showId)
+    if (user.list.some(show => show.id === showId)) {
+      const newUserList = user.list.filter(show => show.id !== showId)
 
-    return this.userRepository.save({
-      ...user,
-      list: newUserList
-    })
+      return this.userRepository.save({
+        ...user,
+        list: newUserList
+      })
+    }
+      throw new NotFoundException(`O show id: ${showId} não foi encontrado nessa lista`)
   }
 }
 
