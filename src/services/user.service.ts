@@ -4,6 +4,7 @@ import { AppDataSource } from '../infrastructure/database/data-source';
 import User from '../entities/user.entity';
 import BadRequestException from '../exceptions/bad-request.exception';
 import { CreateUserDTO } from '../interfaces';
+import NotFoundException from '../exceptions/not-found.exception';
 
 class UserService {
   userRepository: Repository<User>;
@@ -21,6 +22,23 @@ class UserService {
     const userFound = await this.userRepository.findOne({ where: { email } })
 
     return userFound
+  }
+
+  /**
+   * Retorna infos do usuário
+   *
+   * @returns Retorna infos do usuário
+   *
+   * @beta
+   */
+   async listUserInfo(id: number) {
+    const userInfo = await this.userRepository.findOne({ where: { id } });
+
+    if (userInfo) {
+      return userInfo;
+    }
+
+    throw new NotFoundException(`Informações não encontradas`);
   }
 
   /**

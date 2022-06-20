@@ -23,9 +23,9 @@ class ShowService {
   }
 
   /**
-   * Retorna todos o show
+   * Retorna show por id
    *
-   * @returns Retorna todos o show
+   * @returns Retorna show por id
    *
    * @beta
    */
